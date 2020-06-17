@@ -4,7 +4,7 @@ import * as Font from "expo-font";
 import { AppLoading } from "expo";
 import { enableScreens } from "react-native-screens";
 
-import InstructNavigator from "./navigation/InstructNavigator";
+import MainStackNavigator from "./navigation/InstructNavigator";
 
 enableScreens();
 
@@ -27,7 +27,7 @@ export default function App() {
     );
   }
 
-  return <InstructNavigator />;
+  return <MainStackNavigator />;
 }
 
 const styles = StyleSheet.create({

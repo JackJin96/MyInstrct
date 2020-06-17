@@ -3,41 +3,22 @@ import React from "react";
 import { Platform } from "react-native";
 import { createAppContainer } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
-import { HeaderButtons, Item } from "react-navigation-header-buttons";
+import { createDrawerNavigator } from "react-navigation-drawer";
 
 import CategoriesScreen from "../screens/CategoriesScreen";
 import InstructionListScreen from "../screens/InstructionListScreen";
 import InstructionDetailScreen from "../screens/InstuctionDetailScreen";
-import PlusHeaderButton from "../components/CustomHeaderButton";
+import SignInScreen from "../screens/SignInScreen";
+
 import Colors from "../constants/Colors";
 
-const InstructNavigator = createStackNavigator(
+const MainStackNavigator = createStackNavigator(
   {
     Categories: {
       screen: CategoriesScreen,
       navigationOptions: {
         title: "Home",
         headerTitleStyle: { alignSelf: "center" },
-        headerRight: () => (
-          <HeaderButtons HeaderButtonComponent={PlusHeaderButton}>
-            <Item
-              title="Add Task"
-              iconName={Platform.OS === "android" ? "md-add" : "ios-add"}
-              onPress={() => {
-                // navData.navigation.navigate("NewTask");
-                alert("PLus button!");
-              }}
-            />
-            <Item
-              title="Delete Task"
-              iconName={Platform.OS === "android" ? "md-trash" : "ios-trash"}
-              onPress={() => {
-                // navData.navigation.navigate("NewTask");
-                alert("Delete button!");
-              }}
-            />
-          </HeaderButtons>
-        ),
       },
     },
     InstructionList: InstructionListScreen,
@@ -49,11 +30,21 @@ const InstructNavigator = createStackNavigator(
         backgroundColor:
           Platform.OS === "android" ? Colors.primaryColor : "white",
       },
-      headerTitleAlign: 'center',
+      headerTitleAlign: "center",
       headerTintColor:
         Platform.OS === "android" ? "white" : Colors.primaryColor,
     },
   }
 );
 
-export default createAppContainer(InstructNavigator);
+// create another stack navigator so the screen has a header
+const SignInNavigator = createStackNavigator({
+  SignIn: SignInScreen,
+});
+
+const MainNavigator = createDrawerNavigator({
+  Home: MainStackNavigator,
+  SignIn: SignInNavigator,
+});
+
+export default createAppContainer(MainNavigator);
