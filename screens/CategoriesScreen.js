@@ -4,20 +4,39 @@ import {
   Text,
   StyleSheet,
   Button,
+  FlatList,
+  TouchableOpacity,
   ProgressViewIOSComponent,
 } from "react-native";
 
+import { CATEGORIES } from "../data/dummy-data";
+import CategoryGridTile from "../components/CategoryGridTile";
+
 const CategoriesScreen = (props) => {
-  return (
-    <View style={styles.screen}>
-      <Text>The Categories Screen</Text>
-      <Button
-        title="Go to List!"
-        onPress={() => {
-          props.navigation.navigate({ routeName: "InstructionList" });
+  const renderGridItem = (itemData) => {
+    return (
+      <CategoryGridTile
+        title={itemData.item.title}
+        color={itemData.item.color}
+        onSelect={() => {
+          props.navigation.navigate({
+            routeName: "InstructionList",
+            params: {
+              categoryId: itemData.item.id,
+            },
+          });
         }}
       />
-    </View>
+    );
+  };
+
+  return (
+    <FlatList
+      keyExtractor={(item, index) => item.id}
+      data={CATEGORIES}
+      renderItem={renderGridItem}
+      numColumns={2}
+    />
   );
 };
 
