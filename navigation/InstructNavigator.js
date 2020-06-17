@@ -38,9 +38,22 @@ const MainStackNavigator = createStackNavigator(
 );
 
 // create another stack navigator so the screen has a header
-const SignInNavigator = createStackNavigator({
-  SignIn: SignInScreen,
-});
+const SignInNavigator = createStackNavigator(
+  {
+    SignIn: SignInScreen,
+  },
+  {
+    defaultNavigationOptions: {
+      headerStyle: {
+        backgroundColor:
+          Platform.OS === "android" ? Colors.primaryColor : "white",
+      },
+      headerTitleAlign: "center",
+      headerTintColor:
+        Platform.OS === "android" ? "white" : Colors.primaryColor,
+    },
+  }
+);
 
 const MainNavigator = createDrawerNavigator({
   Home: MainStackNavigator,
