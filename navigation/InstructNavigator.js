@@ -18,7 +18,6 @@ const MainStackNavigator = createStackNavigator(
       screen: CategoriesScreen,
       navigationOptions: {
         title: "Home",
-        headerTitleStyle: { alignSelf: "center" },
       },
     },
     InstructionList: InstructionListScreen,
@@ -29,6 +28,11 @@ const MainStackNavigator = createStackNavigator(
       headerStyle: {
         backgroundColor:
           Platform.OS === "android" ? Colors.primaryColor : "white",
+      },
+      headerTitleStyle: {
+        alignSelf: "center",
+        fontFamily: "open-sans-bold",
+        fontSize: 18,
       },
       headerTitleAlign: "center",
       headerTintColor:
@@ -44,9 +48,15 @@ const SignInNavigator = createStackNavigator(
   },
   {
     defaultNavigationOptions: {
+      title: "Sync With Cloud",
       headerStyle: {
         backgroundColor:
           Platform.OS === "android" ? Colors.primaryColor : "white",
+      },
+      headerTitleStyle: {
+        alignSelf: "center",
+        fontFamily: "open-sans-bold",
+        fontSize: 18,
       },
       headerTitleAlign: "center",
       headerTintColor:
@@ -55,9 +65,25 @@ const SignInNavigator = createStackNavigator(
   }
 );
 
-const MainNavigator = createDrawerNavigator({
-  Home: MainStackNavigator,
-  SignIn: SignInNavigator,
-});
+const MainNavigator = createDrawerNavigator(
+  {
+    Home: MainStackNavigator,
+    SignIn: {
+      screen: SignInNavigator,
+      navigationOptions: {
+        drawerLabel: "Sync With Cloud",
+      },
+    },
+  },
+  {
+    contentOptions: {
+      activeTintColor: Colors.primaryColor,
+      labelStyle: {
+        fontFamily: "open-sans-bold",
+        fontSize: 18,
+      },
+    },
+  }
+);
 
 export default createAppContainer(MainNavigator);
