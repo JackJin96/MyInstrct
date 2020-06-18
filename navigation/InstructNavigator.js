@@ -8,6 +8,7 @@ import { createDrawerNavigator } from "react-navigation-drawer";
 import CategoriesScreen from "../screens/CategoriesScreen";
 import InstructionListScreen from "../screens/InstructionListScreen";
 import InstructionDetailScreen from "../screens/InstuctionDetailScreen";
+import AddCategoryScreen from "../screens/AddCategoryScreen";
 import SignInScreen from "../screens/SignInScreen";
 
 import Colors from "../constants/Colors";
@@ -22,6 +23,12 @@ const MainStackNavigator = createStackNavigator(
     },
     InstructionList: InstructionListScreen,
     InstructionDetail: InstructionDetailScreen,
+    AddCategory: {
+      screen: AddCategoryScreen,
+      navigationOptions: {
+        title: "Add Category",
+      },
+    },
   },
   {
     defaultNavigationOptions: {

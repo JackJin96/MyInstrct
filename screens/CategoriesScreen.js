@@ -50,8 +50,7 @@ CategoriesScreen.navigationOptions = (navData) => {
           title="Add Task"
           iconName={Platform.OS === "android" ? "md-add" : "ios-add"}
           onPress={() => {
-            // navData.navigation.navigate("NewTask");
-            alert("PLus button!");
+            navData.navigation.navigate("AddCategory");
           }}
         />
         <Item
