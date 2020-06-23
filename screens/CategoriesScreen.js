@@ -3,10 +3,7 @@ import {
   View,
   Text,
   StyleSheet,
-  Button,
   FlatList,
-  TouchableOpacity,
-  ProgressViewIOSComponent,
 } from "react-native";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 
@@ -47,18 +44,11 @@ CategoriesScreen.navigationOptions = (navData) => {
     headerRight: () => (
       <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
         <Item
-          title="Add Task"
+          title="Add Category"
           iconName={Platform.OS === "android" ? "md-add" : "ios-add"}
+          iconSize={30}
           onPress={() => {
             navData.navigation.navigate("AddCategory");
-          }}
-        />
-        <Item
-          title="Delete Task"
-          iconName={Platform.OS === "android" ? "md-trash" : "ios-trash"}
-          onPress={() => {
-            // navData.navigation.navigate("NewTask");
-            alert("Delete button!");
           }}
         />
       </HeaderButtons>
@@ -68,6 +58,7 @@ CategoriesScreen.navigationOptions = (navData) => {
         <Item
           title="Menu"
           iconName={Platform.OS === "android" ? "md-menu" : "ios-menu"}
+          iconSize={30}
           onPress={() => {
             navData.navigation.toggleDrawer();
           }}
@@ -78,11 +69,7 @@ CategoriesScreen.navigationOptions = (navData) => {
 };
 
 const styles = StyleSheet.create({
-  screen: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
+
 });
 
 export default CategoriesScreen;

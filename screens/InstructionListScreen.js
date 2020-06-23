@@ -1,7 +1,9 @@
 import React from "react";
 import { View, Text, StyleSheet, FlatList } from "react-native";
+import { HeaderButtons, Item } from "react-navigation-header-buttons";
 
 import InstructionItem from "../components/InstructionItem";
+import CustomHeaderButton from "../components/CustomHeaderButton";
 
 import { CATEGORIES, INSTRUCTIONS } from "../data/dummy-data";
 
@@ -41,11 +43,23 @@ const InstructionListScreen = (props) => {
   );
 };
 
-InstructionListScreen.navigationOptions = (navigationData) => {
-  const catId = navigationData.navigation.getParam("categoryId");
+InstructionListScreen.navigationOptions = (navData) => {
+  const catId = navData.navigation.getParam("categoryId");
   const selectedCategory = CATEGORIES.find((cat) => cat.id === catId);
   return {
     headerTitle: selectedCategory.title,
+    headerRight: () => (
+      <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
+        <Item
+          title="Add Instruction"
+          iconName={Platform.OS === "android" ? "md-add" : "ios-add"}
+          iconSize={30}
+          onPress={() => {
+            navData.navigation.navigate("AddInstruction");
+          }}
+        />
+      </HeaderButtons>
+    ),
   };
 };
 

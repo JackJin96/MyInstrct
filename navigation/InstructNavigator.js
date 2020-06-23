@@ -12,6 +12,7 @@ import CategoriesScreen from "../screens/CategoriesScreen";
 import InstructionListScreen from "../screens/InstructionListScreen";
 import InstructionDetailScreen from "../screens/InstuctionDetailScreen";
 import AddCategoryScreen from "../screens/AddCategoryScreen";
+import AddInstructionScreen from "../screens/AddInstructionScreen";
 import FavoriteScreen from "../screens/FavoriteScreen";
 import SignInScreen from "../screens/SignInScreen";
 
@@ -31,6 +32,12 @@ const MainStackNavigator = createStackNavigator(
       screen: AddCategoryScreen,
       navigationOptions: {
         title: "Add Category",
+      },
+    },
+    AddInstruction: {
+      screen: AddInstructionScreen,
+      navigationOptions: {
+        title: "Add Instruction",
       },
     },
   },
