@@ -1,21 +1,20 @@
 import React from "react";
 
-import { View, Text, StyleSheet } from "react-native";
+import InstructionList from "../components/InstructionList";
+import { INSTRUCTIONS } from "../data/dummy-data";
 
 const FavoriteScreen = (props) => {
+  const favInstructions = INSTRUCTIONS.filter(
+    (inst) => inst.id === "i1" || inst.id === "i2"
+  );
+
   return (
-    <View style={styles.screen}>
-      <Text>Favorite Screen</Text>
-    </View>
+    <InstructionList listData={favInstructions} navigation={props.navigation} />
   );
 };
 
-const styles = StyleSheet.create({
-  screen: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-});
+FavoriteScreen.navigationOptions = {
+  title: "Favorites",
+};
 
 export default FavoriteScreen;

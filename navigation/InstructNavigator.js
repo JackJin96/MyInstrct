@@ -18,6 +18,19 @@ import SignInScreen from "../screens/SignInScreen";
 
 import Colors from "../constants/Colors";
 
+const defaultStackNavOptions = {
+  headerStyle: {
+    backgroundColor: Platform.OS === "android" ? Colors.primaryColor : "white",
+  },
+  headerTitleStyle: {
+    alignSelf: "center",
+    fontFamily: "open-sans-bold",
+    fontSize: 18,
+  },
+  headerTitleAlign: "center",
+  headerTintColor: Platform.OS === "android" ? "white" : Colors.primaryColor,
+};
+
 const MainStackNavigator = createStackNavigator(
   {
     Categories: {
@@ -42,20 +55,7 @@ const MainStackNavigator = createStackNavigator(
     },
   },
   {
-    defaultNavigationOptions: {
-      headerStyle: {
-        backgroundColor:
-          Platform.OS === "android" ? Colors.primaryColor : "white",
-      },
-      headerTitleStyle: {
-        alignSelf: "center",
-        fontFamily: "open-sans-bold",
-        fontSize: 18,
-      },
-      headerTitleAlign: "center",
-      headerTintColor:
-        Platform.OS === "android" ? "white" : Colors.primaryColor,
-    },
+    defaultNavigationOptions: defaultStackNavOptions,
   }
 );
 
@@ -65,8 +65,17 @@ const SignInNavigator = createStackNavigator(
     SignIn: SignInScreen,
   },
   {
+    defaultNavigationOptions: defaultStackNavOptions,
+  }
+);
+
+const FavStackNavigator = createStackNavigator(
+  {
+    Favorites: FavoriteScreen,
+    InstructionDetail: InstructionDetailScreen,
+  },
+  {
     defaultNavigationOptions: {
-      title: "Sync With Cloud",
       headerStyle: {
         backgroundColor:
           Platform.OS === "android" ? Colors.primaryColor : "white",
@@ -97,7 +106,7 @@ const tabScreenConfig = {
     },
   },
   Favorites: {
-    screen: FavoriteScreen,
+    screen: FavStackNavigator,
     navigationOptions: {
       tabBarLabel: "Favorites",
       tabBarIcon: (tabInfo) => {

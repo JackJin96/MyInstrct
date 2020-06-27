@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, ScrollView, StyleSheet } from "react-native";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 
 import { INSTRUCTIONS } from "../data/dummy-data";
@@ -13,23 +13,27 @@ const InstructionDetailScreen = (props) => {
   );
 
   return (
-    <View style={styles.screen}>
-      <Text>{selectedInstructions.title}</Text>
-    </View>
+    <ScrollView>
+      <View style={styles.screen}>
+        <Text>{selectedInstructions.description}</Text>
+      </View>
+    </ScrollView>
   );
 };
 
 InstructionDetailScreen.navigationOptions = (navData) => {
-	const instructionId = navData.navigation.getParam("instructionId");
-	const selectedInstruction = INSTRUCTIONS.find(inst => inst.id === instructionId);
+  const instructionId = navData.navigation.getParam("instructionId");
+  const selectedInstruction = INSTRUCTIONS.find(
+    (inst) => inst.id === instructionId
+  );
   return {
-		title: selectedInstruction.title,
-		headerRight: () => (
+    title: selectedInstruction.title,
+    headerRight: () => (
       <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
         <Item
           title="Add Task"
-					iconName={Platform.OS === "android" ? "md-star" : "ios-star"}
-					iconSize={25}
+          iconName={Platform.OS === "android" ? "md-star" : "ios-star"}
+          iconSize={25}
           onPress={() => {
             alert("Favorite Button!");
           }}
