@@ -4,6 +4,7 @@ import { HeaderButtons, Item } from "react-navigation-header-buttons";
 
 import { INSTRUCTIONS } from "../data/dummy-data";
 import CustomHeaderButton from "../components/CustomHeaderButton";
+import DefaultText from "../components/DefaultText";
 
 const InstructionDetailScreen = (props) => {
   const instructionId = props.navigation.getParam("instructionId");
@@ -15,7 +16,12 @@ const InstructionDetailScreen = (props) => {
   return (
     <ScrollView>
       <View style={styles.screen}>
-        <Text>{selectedInstructions.description}</Text>
+        <Text style={styles.title}>Descriptions:</Text>
+        <DefaultText>{selectedInstructions.description}</DefaultText>
+        <Text style={styles.title}>Photos:</Text>
+        <DefaultText>Add Photos Here...</DefaultText>
+        <Text style={styles.title}>Videos:</Text>
+        <DefaultText>Add Videos Here...</DefaultText>
       </View>
     </ScrollView>
   );
@@ -48,6 +54,13 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+  },
+  title: {
+    marginTop: "10%",
+    marginBottom: "3%",
+    fontFamily: "open-sans-bold",
+    fontSize: 20,
+    textAlign: "center",
   },
 });
 

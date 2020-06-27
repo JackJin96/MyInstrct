@@ -19,6 +19,7 @@ SignInScreen.navigationOptions = (navData) => {
         <Item
           title="Menu"
           iconName={Platform.OS === "android" ? "md-menu" : "ios-menu"}
+          iconSize={30}
           onPress={() => {
             navData.navigation.toggleDrawer();
           }}
