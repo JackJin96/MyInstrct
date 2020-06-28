@@ -14,6 +14,7 @@ const InstructionList = (props) => {
             routeName: "InstructionDetail",
             params: {
               instructionId: itemData.item.id,
+              instructionTitle: itemData.item.title,
             },
           });
         }}

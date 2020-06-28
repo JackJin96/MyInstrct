@@ -1,16 +1,21 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 
 import CustomHeaderButton from "../components/CustomHeaderButton";
 import InstructionList from "../components/InstructionList";
 
-import { CATEGORIES, INSTRUCTIONS } from "../data/dummy-data";
+import { CATEGORIES } from "../data/dummy-data";
 
 const InstructionListScreen = (props) => {
   const catId = props.navigation.getParam("categoryId");
 
-  const displayedInstructions = INSTRUCTIONS.filter(
-    (instruction) => instruction.categoryIds.indexOf(catId) >= 0
+  const availableInstructions = useSelector(
+    (state) => state.instructions.instructions
+  );
+
+  const displayedInstructions = availableInstructions.filter(
+    (inst) => inst.categoryIds.indexOf(catId) >= 0
   );
 
   return (

@@ -1,15 +1,19 @@
 import React from "react";
 import { View, Text, ScrollView, StyleSheet } from "react-native";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
+import { useSelector } from "react-redux";
 
-import { INSTRUCTIONS } from "../data/dummy-data";
 import CustomHeaderButton from "../components/CustomHeaderButton";
 import DefaultText from "../components/DefaultText";
 
 const InstructionDetailScreen = (props) => {
+  const availableInstructions = useSelector(
+    (state) => state.instructions.instructions
+  );
+
   const instructionId = props.navigation.getParam("instructionId");
 
-  const selectedInstructions = INSTRUCTIONS.find(
+  const selectedInstructions = availableInstructions.find(
     (inst) => inst.id === instructionId
   );
 
@@ -28,12 +32,9 @@ const InstructionDetailScreen = (props) => {
 };
 
 InstructionDetailScreen.navigationOptions = (navData) => {
-  const instructionId = navData.navigation.getParam("instructionId");
-  const selectedInstruction = INSTRUCTIONS.find(
-    (inst) => inst.id === instructionId
-  );
+  const instructionTitle = navData.navigation.getParam("instructionTitle");
   return {
-    title: selectedInstruction.title,
+    title: instructionTitle,
     headerRight: () => (
       <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
         <Item
