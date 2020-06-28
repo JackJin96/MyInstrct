@@ -7,7 +7,7 @@ import { createStore, combineReducers } from "redux";
 import { Provider } from "react-redux";
 
 import MainStackNavigator from "./navigation/InstructNavigator";
-import instructionsReducer from "./store/reducers/instructions";
+import instructionsReducer from "./store/reducers/instReducer";
 
 enableScreens();
 

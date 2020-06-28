@@ -1,10 +1,14 @@
 import React from "react";
 import { View, Text, FlatList, StyleSheet } from "react-native";
+import { useSelector } from "react-redux";
 
 import InstructionItem from "./InstructionItem";
 
 const InstructionList = (props) => {
+  const favoriteInstructions = useSelector(state => state.instructions.favoriteInstructions);
+
   const renderInstructionItem = (itemData) => {
+    const isFavorite = favoriteInstructions.some(inst => inst.id === itemData.item.id);
     return (
       <InstructionItem
         title={itemData.item.title}
@@ -15,6 +19,7 @@ const InstructionList = (props) => {
             params: {
               instructionId: itemData.item.id,
               instructionTitle: itemData.item.title,
+              isFav: isFavorite
             },
           });
         }}

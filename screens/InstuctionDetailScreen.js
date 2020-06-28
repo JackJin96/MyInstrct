@@ -1,21 +1,41 @@
-import React from "react";
+import React, { useEffect, useCallback } from "react";
 import { View, Text, ScrollView, StyleSheet } from "react-native";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 import CustomHeaderButton from "../components/CustomHeaderButton";
 import DefaultText from "../components/DefaultText";
+import { toggleFavorite } from "../store/actions/instActions";
 
 const InstructionDetailScreen = (props) => {
+  const instructionId = props.navigation.getParam("instructionId");
+
   const availableInstructions = useSelector(
     (state) => state.instructions.instructions
   );
-
-  const instructionId = props.navigation.getParam("instructionId");
+  const curInstIsFavorite = useSelector((state) =>
+    state.instructions.favoriteInstructions.some(
+      (inst) => inst.id === instructionId
+    )
+  );
 
   const selectedInstructions = availableInstructions.find(
     (inst) => inst.id === instructionId
   );
+
+  const dispatch = useDispatch();
+
+  const toggleFavoriteHandler = useCallback(() => {
+    dispatch(toggleFavorite(instructionId));
+  }, [dispatch, instructionId]);
+
+  useEffect(() => {
+    props.navigation.setParams({ toggleFav: toggleFavoriteHandler });
+  }, [toggleFavoriteHandler]);
+
+  useEffect(() => {
+    props.navigation.setParams({ isFav: curInstIsFavorite });
+  }, [curInstIsFavorite]);
 
   return (
     <ScrollView>
@@ -33,17 +53,25 @@ const InstructionDetailScreen = (props) => {
 
 InstructionDetailScreen.navigationOptions = (navData) => {
   const instructionTitle = navData.navigation.getParam("instructionTitle");
+  const toggleFav = navData.navigation.getParam("toggleFav");
+  const isFavorite = navData.navigation.getParam("isFav");
   return {
     title: instructionTitle,
     headerRight: () => (
       <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
         <Item
           title="Add Task"
-          iconName={Platform.OS === "android" ? "md-star" : "ios-star"}
+          iconName={
+            Platform.OS === "android"
+              ? isFavorite
+                ? "md-star"
+                : "md-star-outline"
+              : isFavorite
+              ? "ios-star"
+              : "ios-star-outline"
+          }
           iconSize={25}
-          onPress={() => {
-            alert("Favorite Button!");
-          }}
+          onPress={toggleFav}
         />
       </HeaderButtons>
     ),

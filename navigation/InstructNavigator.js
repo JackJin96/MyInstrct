@@ -78,7 +78,7 @@ const FavStackNavigator = createStackNavigator(
     defaultNavigationOptions: {
       headerStyle: {
         backgroundColor:
-          Platform.OS === "android" ? Colors.primaryColor : "white",
+          Platform.OS === "android" ? Colors.accentColor : "white",
       },
       headerTitleStyle: {
         alignSelf: "center",
