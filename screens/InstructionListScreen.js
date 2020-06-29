@@ -5,8 +5,6 @@ import { HeaderButtons, Item } from "react-navigation-header-buttons";
 import CustomHeaderButton from "../components/CustomHeaderButton";
 import InstructionList from "../components/InstructionList";
 
-import { CATEGORIES } from "../data/dummy-data";
-
 const InstructionListScreen = (props) => {
   const catId = props.navigation.getParam("categoryId");
 
@@ -27,10 +25,9 @@ const InstructionListScreen = (props) => {
 };
 
 InstructionListScreen.navigationOptions = (navData) => {
-  const catId = navData.navigation.getParam("categoryId");
-  const selectedCategory = CATEGORIES.find((cat) => cat.id === catId);
+  const catTitle = navData.navigation.getParam("categoryTitle");
   return {
-    headerTitle: selectedCategory.title,
+    headerTitle: catTitle,
     headerRight: () => (
       <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
         <Item

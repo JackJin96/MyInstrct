@@ -17,6 +17,19 @@ export const CATEGORIES = [
 import Category from "../models/category";
 import Instruction from "../models/instruction";
 
+export const CATEGORY_COLORS = [
+  "#f5428d",
+  "#f54242",
+  "#f5a442",
+  "#f5d142",
+  "#368dff",
+  "#41d95d",
+  "#9eecff",
+  "#b9ffb0",
+  "#ffc7ff",
+  "#47fced",
+];
+
 export const CATEGORIES = [
   new Category("c1", "Furniture", "#f5428d"),
   new Category("c2", "Recipe", "#f54242"),

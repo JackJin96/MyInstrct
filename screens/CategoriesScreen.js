@@ -1,17 +1,16 @@
 import React from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  FlatList,
-} from "react-native";
+import { View, Text, StyleSheet, FlatList } from "react-native";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 
-import { CATEGORIES } from "../data/dummy-data";
 import CategoryGridTile from "../components/CategoryGridTile";
 import CustomHeaderButton from "../components/CustomHeaderButton";
+import { useSelector } from "react-redux";
 
 const CategoriesScreen = (props) => {
+  const availableCategories = useSelector(
+    (state) => state.categories.categories
+  );
+
   const renderGridItem = (itemData) => {
     return (
       <CategoryGridTile
@@ -22,6 +21,7 @@ const CategoriesScreen = (props) => {
             routeName: "InstructionList",
             params: {
               categoryId: itemData.item.id,
+              categoryTitle: itemData.item.title,
             },
           });
         }}
@@ -32,7 +32,7 @@ const CategoriesScreen = (props) => {
   return (
     <FlatList
       keyExtractor={(item, index) => item.id}
-      data={CATEGORIES}
+      data={availableCategories}
       renderItem={renderGridItem}
       numColumns={2}
     />
@@ -68,8 +68,6 @@ CategoriesScreen.navigationOptions = (navData) => {
   };
 };
 
-const styles = StyleSheet.create({
-
-});
+const styles = StyleSheet.create({});
 
 export default CategoriesScreen;

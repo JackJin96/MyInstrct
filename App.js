@@ -8,10 +8,12 @@ import { Provider } from "react-redux";
 
 import MainStackNavigator from "./navigation/InstructNavigator";
 import instructionsReducer from "./store/reducers/instReducer";
+import categoriesReducer from "./store/reducers/categoriesReducer";
 
 enableScreens();
 
 const rootReducer = combineReducers({
+  categories: categoriesReducer,
   instructions: instructionsReducer,
 });
 

@@ -1,5 +1,4 @@
 import React from "react";
-
 import {
   View,
   ScrollView,
@@ -30,7 +29,6 @@ const AddInstructionScreen = (props) => {
         <Button
           title="Save Instruction"
           color={Colors.primaryColor}
-          onPress={() => {}}
         />
         <Button
           title="Cancel"
