@@ -9,6 +9,7 @@ import {
 } from "react-native";
 
 import Colors from "../constants/Colors";
+import ImagePicker from "../components/ImagePicker";
 
 const AddInstructionScreen = (props) => {
   return (
@@ -23,7 +24,7 @@ const AddInstructionScreen = (props) => {
           scrollEnabled={true}
         />
         <Text style={styles.label}>New Instruction Images:</Text>
-        <Text>Replace this with add image option</Text>
+        <ImagePicker />
       </View>
       <View style={styles.buttonContainer}>
         <Button
