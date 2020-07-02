@@ -27,10 +27,7 @@ const AddInstructionScreen = (props) => {
         <ImagePicker />
       </View>
       <View style={styles.buttonContainer}>
-        <Button
-          title="Save Instruction"
-          color={Colors.primaryColor}
-        />
+        <Button title="Save Instruction" color={Colors.primaryColor} />
         <Button
           title="Cancel"
           color={Colors.primaryColor}
@@ -61,7 +58,10 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     flexDirection: "row",
+    width: "100%",
     justifyContent: "space-evenly",
+    marginTop: 10,
+    marginBottom: 30,
   },
 });
 

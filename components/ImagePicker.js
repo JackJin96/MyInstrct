@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, Button, Image, Text, StyleSheet, Alert } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import * as Permissions from "expo-permissions";
@@ -6,7 +6,7 @@ import * as Permissions from "expo-permissions";
 import Colors from "../constants/Colors";
 
 const ImgPicker = (props) => {
-  const [pickedImage, setPickedImage] = useState();
+  const [pickedImages, setPickedImage] = useState([]);
 
   const verifyPermissions = async () => {
     const result = await Permissions.askAsync(
@@ -34,23 +34,50 @@ const ImgPicker = (props) => {
       quality: 1,
     });
 
-    setPickedImage(image.uri);
+    if (!image.cancelled) {
+      setPickedImage((prevImages) => prevImages.concat(image.uri));
+    }
   };
+
+  const chooseImageHandler = async () => {
+    const hasPermission = await verifyPermissions();
+    if (!hasPermission) {
+      return;
+    }
+    const image = await ImagePicker.launchImageLibraryAsync({
+      allowsEditing: true,
+    });
+
+    if (!image.cancelled) {
+      setPickedImage((prevImages) => prevImages.concat(image.uri));
+    }
+  };
+
+  const renderedImages = pickedImages.map((imageUri) => {
+    return <Image style={styles.image} source={{ uri: imageUri }} />;
+  });
 
   return (
     <View style={styles.imagePicker}>
       <View style={styles.imagePreview}>
-        {!pickedImage ? (
+        {pickedImages.length === 0 ? (
           <Text>No image picker yet.</Text>
         ) : (
-          <Image style={styles.image} source={{ uri: pickedImage }} />
+          renderedImages
         )}
       </View>
-      <Button
-        title="Take Image"
-        color={Colors.primaryColor}
-        onPress={takeImageHandler}
-      />
+      <View style={styles.imageButtonsContainer}>
+        <Button
+          title="Take Image"
+          color={Colors.primaryColor}
+          onPress={takeImageHandler}
+        />
+        <Button
+          title="Choose From Library"
+          color={Colors.primaryColor}
+          onPress={chooseImageHandler}
+        />
+      </View>
     </View>
   );
 };
@@ -61,16 +88,22 @@ const styles = StyleSheet.create({
   },
   imagePreview: {
     width: "100%",
-    height: 200,
     marginBottom: 10,
     justifyContent: "center",
     alignItems: "center",
-    borderColor: "#ccc",
-    borderWidth: 1,
   },
   image: {
     width: "100%",
-    height: "100%",
+    height: 200,
+    borderColor: "#ccc",
+    borderWidth: 1,
+    marginTop: "5%",
+    marginBottom: "5%",
+  },
+  imageButtonsContainer: {
+    flexDirection: "row",
+    width: "100%",
+    justifyContent: "space-evenly",
   },
 });
 
