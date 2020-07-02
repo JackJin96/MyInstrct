@@ -26,6 +26,7 @@ const InstructionListScreen = (props) => {
 
 InstructionListScreen.navigationOptions = (navData) => {
   const catTitle = navData.navigation.getParam("categoryTitle");
+  const catId = navData.navigation.getParam("categoryId");
   return {
     headerTitle: catTitle,
     headerRight: () => (
@@ -35,7 +36,12 @@ InstructionListScreen.navigationOptions = (navData) => {
           iconName={Platform.OS === "android" ? "md-add" : "ios-add"}
           iconSize={30}
           onPress={() => {
-            navData.navigation.navigate("AddInstruction");
+            navData.navigation.navigate({
+              routeName: "AddInstruction",
+              params: {
+                catId: catId,
+              },
+            });
           }}
         />
       </HeaderButtons>

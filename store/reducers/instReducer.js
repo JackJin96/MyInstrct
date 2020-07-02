@@ -1,5 +1,6 @@
 import { INSTRUCTIONS } from "../../data/dummy-data";
-import { TOGGLE_FAVORITE } from "../actions/instActions";
+import { TOGGLE_FAVORITE, ADD_INSTRUCTION } from "../actions/instActions";
+import Instruction from "../../models/instruction";
 
 const initialState = {
   instructions: INSTRUCTIONS,
@@ -25,6 +26,19 @@ const instructionsReducer = (state = initialState, action) => {
           favoriteInstructions: state.favoriteInstructions.concat(instToAdd),
         };
       }
+    case ADD_INSTRUCTION:
+      const newInstId = "i" + (state.instructions.length + 1).toString();
+      const instToAdd = new Instruction(
+        newInstId,
+        action.catIds,
+        action.instTitle,
+        action.instDesc,
+        action.instImageUris
+      );
+      return {
+        ...state,
+        instructions: state.instructions.concat(instToAdd),
+      };
     default:
       return state;
   }

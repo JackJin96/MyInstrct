@@ -6,7 +6,7 @@ import * as Permissions from "expo-permissions";
 import Colors from "../constants/Colors";
 
 const ImgPicker = (props) => {
-  const [pickedImages, setPickedImage] = useState([]);
+  const [pickedImagePaths, setPickedImage] = useState([]);
 
   const verifyPermissions = async () => {
     const result = await Permissions.askAsync(
@@ -36,6 +36,7 @@ const ImgPicker = (props) => {
 
     if (!image.cancelled) {
       setPickedImage((prevImages) => prevImages.concat(image.uri));
+      props.onImageSelected(image.uri);
     }
   };
 
@@ -50,17 +51,18 @@ const ImgPicker = (props) => {
 
     if (!image.cancelled) {
       setPickedImage((prevImages) => prevImages.concat(image.uri));
+      props.onImageSelected(image.uri);
     }
   };
 
-  const renderedImages = pickedImages.map((imageUri) => {
+  const renderedImages = pickedImagePaths.map((imageUri) => {
     return <Image style={styles.image} source={{ uri: imageUri }} />;
   });
 
   return (
     <View style={styles.imagePicker}>
       <View style={styles.imagePreview}>
-        {pickedImages.length === 0 ? (
+        {pickedImagePaths.length === 0 ? (
           <Text>No image picker yet.</Text>
         ) : (
           renderedImages

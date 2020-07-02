@@ -48,12 +48,20 @@ export const INSTRUCTIONS = [
     "i1",
     ["c1"],
     "Dining Table",
-    "Step 1: Take out stuff from package. \n Step 2: Assemble all the parts"
+    "Step 1: Take out stuff from package. \n Step 2: Assemble all the parts",
+    [
+      "https://www.gamasutra.com/db_area/images/news/2018/Jun/320213/supermario64thumb1.jpg",
+      "https://www.computerhope.com/jargon/r/random-dice.jpg",
+    ]
   ),
   new Instruction(
     "i2",
     ["c1", "c10"],
     "Chair",
-    "Step 1: Take out stuff from package. \n Step 2: Assemble all the parts"
+    "Step 1: Take out stuff from package. \n Step 2: Assemble all the parts",
+    [
+      "https://www.gamasutra.com/db_area/images/news/2018/Jun/320213/supermario64thumb1.jpg",
+      "https://www.computerhope.com/jargon/r/random-dice.jpg",
+    ]
   ),
 ];
