@@ -1,5 +1,5 @@
 import React, { useEffect, useCallback } from "react";
-import { View, Text, ScrollView, StyleSheet } from "react-native";
+import { View, Text, ScrollView, StyleSheet, Image } from "react-native";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 import { useSelector, useDispatch } from "react-redux";
 
@@ -19,7 +19,7 @@ const InstructionDetailScreen = (props) => {
     )
   );
 
-  const selectedInstructions = availableInstructions.find(
+  const selectedInstruction = availableInstructions.find(
     (inst) => inst.id === instructionId
   );
 
@@ -37,15 +37,29 @@ const InstructionDetailScreen = (props) => {
     props.navigation.setParams({ isFav: curInstIsFavorite });
   }, [curInstIsFavorite]);
 
+  const renderedImages = selectedInstruction.imageUris.map((imageUri) => {
+    return (
+      <Image
+        resizeMode={"contain"}
+        style={styles.image}
+        source={{ uri: imageUri }}
+      />
+    );
+  });
+
   return (
     <ScrollView>
       <View style={styles.screen}>
         <Text style={styles.title}>Descriptions:</Text>
-        <DefaultText>{selectedInstructions.description}</DefaultText>
-        <Text style={styles.title}>Photos:</Text>
-        <DefaultText>Add Photos Here...</DefaultText>
+        <DefaultText>{selectedInstruction.description}</DefaultText>
+        <Text style={styles.title}>Images:</Text>
+        {selectedInstruction.imageUris.length === 0 ? (
+          <DefaultText>No photos for this instruction.</DefaultText>
+        ) : (
+          renderedImages
+        )}
         <Text style={styles.title}>Videos:</Text>
-        <DefaultText>Add Videos Here...</DefaultText>
+        <DefaultText>No photos for this instruction.</DefaultText>
       </View>
     </ScrollView>
   );
@@ -90,6 +104,12 @@ const styles = StyleSheet.create({
     fontFamily: "open-sans-bold",
     fontSize: 20,
     textAlign: "center",
+  },
+  image: {
+    width: "100%",
+    height: 200,
+    marginTop: "1%",
+    marginBottom: "1%",
   },
 });
 
