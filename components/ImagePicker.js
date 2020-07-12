@@ -31,7 +31,6 @@ const ImgPicker = (props) => {
     }
     const image = await ImagePicker.launchCameraAsync({
       allowsEditing: true,
-      quality: 1,
     });
 
     if (!image.cancelled) {
@@ -55,8 +54,8 @@ const ImgPicker = (props) => {
     }
   };
 
-  const renderedImages = pickedImagePaths.map((imageUri) => {
-    return <Image style={styles.image} source={{ uri: imageUri }} />;
+  const renderedImages = pickedImagePaths.map((imageUri, i) => {
+    return <Image key={i} style={styles.image} source={{ uri: imageUri }} />;
   });
 
   return (

@@ -37,9 +37,10 @@ const InstructionDetailScreen = (props) => {
     props.navigation.setParams({ isFav: curInstIsFavorite });
   }, [curInstIsFavorite]);
 
-  const renderedImages = selectedInstruction.imageUris.map((imageUri) => {
+  const renderedImages = selectedInstruction.imageUris.map((imageUri, i) => {
     return (
       <Image
+        key={i}
         resizeMode={"contain"}
         style={styles.image}
         source={{ uri: imageUri }}
