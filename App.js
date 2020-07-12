@@ -9,8 +9,18 @@ import { Provider } from "react-redux";
 import MainStackNavigator from "./navigation/InstructNavigator";
 import instructionsReducer from "./store/reducers/instReducer";
 import categoriesReducer from "./store/reducers/categoriesReducer";
+import { init } from "./helpers/db";
 
 enableScreens();
+
+init()
+  .then(() => {
+    console.log("Initialized Database");
+  })
+  .catch((err) => {
+    console.log("Failed to initialized database.");
+    console.log(err);
+  });
 
 const rootReducer = combineReducers({
   categories: categoriesReducer,

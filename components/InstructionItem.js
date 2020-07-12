@@ -10,8 +10,6 @@ import {
 const defaultBgImage = require("../assets/images/InstructionItemDefault.png");
 
 const InstructionItem = (props) => {
-  console.log("IMAGE URI:");
-  console.log(props.imageUri);
   return (
     <View style={styles.instructionItem}>
       <TouchableOpacity onPress={props.onSelectInstruction}>
