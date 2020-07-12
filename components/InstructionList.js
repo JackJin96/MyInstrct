@@ -5,21 +5,26 @@ import { useSelector } from "react-redux";
 import InstructionItem from "./InstructionItem";
 
 const InstructionList = (props) => {
-  const favoriteInstructions = useSelector(state => state.instructions.favoriteInstructions);
+  const favoriteInstructions = useSelector(
+    (state) => state.instructions.favoriteInstructions
+  );
 
   const renderInstructionItem = (itemData) => {
-    const isFavorite = favoriteInstructions.some(inst => inst.id === itemData.item.id);
+    const isFavorite = favoriteInstructions.some(
+      (inst) => inst.id === itemData.item.id
+    );
     return (
       <InstructionItem
         title={itemData.item.title}
         desc={itemData.item.description}
+        imageUris={itemData.item.imageUris}
         onSelectInstruction={() => {
           props.navigation.navigate({
             routeName: "InstructionDetail",
             params: {
               instructionId: itemData.item.id,
               instructionTitle: itemData.item.title,
-              isFav: isFavorite
+              isFav: isFavorite,
             },
           });
         }}

@@ -7,14 +7,23 @@ import {
   ImageBackground,
 } from "react-native";
 
-const backgroundImage = require("../assets/images/InstructionItemDefault.png");
+const defaultBgImage = require("../assets/images/InstructionItemDefault.png");
 
 const InstructionItem = (props) => {
+  console.log("IMAGE URI:");
+  console.log(props.imageUri);
   return (
     <View style={styles.instructionItem}>
       <TouchableOpacity onPress={props.onSelectInstruction}>
         <View>
-          <ImageBackground source={backgroundImage} style={styles.bgImage}>
+          <ImageBackground
+            source={
+              props.imageUris.length === 0
+                ? defaultBgImage
+                : { uri: props.imageUris[0] }
+            }
+            style={styles.bgImage}
+          >
             <View style={styles.titleContainer}>
               <Text style={styles.title}>{props.title}</Text>
             </View>
