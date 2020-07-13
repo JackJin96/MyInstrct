@@ -11,7 +11,9 @@ import {
 import { useSelector, useDispatch } from "react-redux";
 
 import Colors from "../constants/Colors";
+import { CATEGORY_COLORS } from "../data/dummy-data";
 import { addCategory } from "../store/actions/categoryActions";
+import { insertCategory } from "../helpers/db";
 
 const AddCategoryScreen = (props) => {
   const [enteredText, setEnteredText] = useState("");
@@ -22,16 +24,26 @@ const AddCategoryScreen = (props) => {
 
   const dispatch = useDispatch();
 
-  const submitTitleHandler = useCallback(() => {
+  const submitHandler = useCallback(() => {
     const titleExistIndex = availableCategories.findIndex(
       (category) => category.title === enteredText
     );
     if (titleExistIndex >= 0) {
       Alert.alert("Duplication", "The chosen category name already exists!");
     } else {
-      dispatch(addCategory(enteredText));
-      Alert.alert("Success", "Category has been added!");
-      props.navigation.pop();
+      try {
+        const newCatNum = availableCategories.length + 1;
+        const newCatColor = CATEGORY_COLORS[(newCatNum % 10) - 1];
+        insertCategory(enteredText, newCatColor).then((dbRes) => {
+          console.log(dbRes);
+          dispatch(addCategory(enteredText, newCatColor));
+          Alert.alert("Success", "Category has been added!");
+          props.navigation.pop();
+        });
+      } catch (err) {
+        console.log(err);
+        throw err;
+      }
     }
   }, [dispatch, enteredText]);
 
@@ -48,7 +60,7 @@ const AddCategoryScreen = (props) => {
         <Button
           title="Save Category"
           color={Colors.primaryColor}
-          onPress={submitTitleHandler}
+          onPress={submitHandler}
         />
         <Button
           title="Cancel"

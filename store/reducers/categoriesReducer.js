@@ -1,4 +1,4 @@
-import { CATEGORIES, CATEGORY_COLORS } from "../../data/dummy-data";
+import { CATEGORIES } from "../../data/dummy-data";
 import { ADD_CATEGORY } from "../actions/categoryActions";
 
 import Category from "../../models/category";
@@ -12,11 +12,10 @@ const categoriesReducer = (state = initialState, action) => {
     case ADD_CATEGORY:
       const newCatNum = state.categories.length + 1;
       const newCatId = "c" + newCatNum.toString();
-      const newCatColor = CATEGORY_COLORS[(newCatNum % 10) - 1];
       const categoryToAdd = new Category(
         newCatId,
         action.catTitle,
-        newCatColor
+        action.catColor
       );
       return {
         ...state,

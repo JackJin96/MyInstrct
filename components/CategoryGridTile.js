@@ -17,7 +17,7 @@ const CategoryGridTile = (props) => {
   }
   return (
     <View style={styles.gridItem}>
-      <TouchableComponent style={{flex: 1}}onPress={props.onSelect}>
+      <TouchableComponent style={{ flex: 1 }} onPress={props.onSelect}>
         <View
           style={{ ...styles.container, ...{ backgroundColor: props.color } }}
         >
@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
     margin: 15,
     height: 150,
     borderRadius: 10,
-    overflow: "hidden"
+    overflow: "hidden",
   },
   container: {
     flex: 1,
