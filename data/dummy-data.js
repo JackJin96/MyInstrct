@@ -30,6 +30,19 @@ export const CATEGORY_COLORS = [
   "#47fced",
 ];
 
+export const CATEGORY_TITLES = [
+  "Furniture",
+  "Recipe",
+  "Song Lyrics",
+  "Piano Sheet Music",
+  "Social Media",
+  "Video Games",
+  "Networking",
+  "Movies",
+  "Toys",
+  "Other",
+];
+
 export const CATEGORIES = [
   new Category("c1", "Furniture", "#f5428d"),
   new Category("c2", "Recipe", "#f54242"),

@@ -60,6 +60,7 @@ const AddCategoryScreen = (props) => {
       console.log(res);
     });
   }, [enteredText]);
+
   */
 
   return (

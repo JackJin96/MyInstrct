@@ -1,21 +1,51 @@
 import * as SQLite from "expo-sqlite";
 
+import {
+  CATEGORY_TITLES,
+  ATEGORY_COLORS,
+  CATEGORY_COLORS,
+} from "../data/dummy-data";
+
 const db = SQLite.openDatabase("MyInstruct.db");
 
 export const init = () => {
   const promise = new Promise((resolve, reject) => {
+    // create categories table
     db.transaction((tx) => {
       tx.executeSql(
         "CREATE TABLE IF NOT EXISTS categories (id INTEGER PRIMARY KEY NOT NULL, title TEXT NOT NULL, color TEXT NOT NULL);",
         [],
-        () => {
-          resolve();
+        (_, res) => {
+          console.log("CREATE TABLE SUCCESS");
         },
         (_, err) => {
           reject(err);
         }
       );
     });
+
+    // initialize 10 default categories
+    for (let i = 0; i < 10; i++) {
+      db.transaction((tx) => {
+        tx.executeSql(
+          `INSERT INTO categories (title, color) SELECT * FROM (SELECT ?, ?) AS tmp WHERE NOT EXISTS (SELECT (title, color) FROM categories WHERE title = ? AND color = ?) LIMIT 1;`,
+          [
+            CATEGORY_TITLES[i],
+            CATEGORY_COLORS[i],
+            CATEGORY_TITLES[i],
+            CATEGORY_COLORS[i],
+          ],
+          (_, res) => {
+            console.log("INSERT " + CATEGORY_TITLES[i] + " SUCCESS");
+          },
+          (_, err) => {
+            reject(err);
+          }
+        );
+      });
+    }
+
+    resolve("init success");
   });
   return promise;
 };
