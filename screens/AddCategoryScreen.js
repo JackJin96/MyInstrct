@@ -13,7 +13,7 @@ import { useSelector, useDispatch } from "react-redux";
 import Colors from "../constants/Colors";
 import { CATEGORY_COLORS } from "../data/dummy-data";
 import { addCategory } from "../store/actions/categoryActions";
-import { insertCategory } from "../helpers/db";
+import { insertCategory, fetchAllCategories, deleteAllCategories } from "../helpers/db";
 
 const AddCategoryScreen = (props) => {
   const [enteredText, setEnteredText] = useState("");
@@ -46,6 +46,21 @@ const AddCategoryScreen = (props) => {
       }
     }
   }, [dispatch, enteredText]);
+
+  /* For Debugging ONLY
+
+  const testShowAllHandler = useCallback(() => {
+    fetchAllCategories().then((res) => {
+      console.log(res);
+    });
+  }, [enteredText]);
+
+  const testDeleteAllHandler = useCallback(() => {
+    deleteAllCategories().then((res) => {
+      console.log(res);
+    });
+  }, [enteredText]);
+  */
 
   return (
     <ScrollView>
